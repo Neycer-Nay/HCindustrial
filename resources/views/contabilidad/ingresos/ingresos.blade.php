@@ -99,6 +99,13 @@
                                 <td>{{ number_format($ingreso->total, 2) }}Bs</td>
                                 <td>{{ $ingreso->estado_pago }}</td>
                                 <td>
+                                    <!-- Botón para editar método de pago -->
+                                    <button type="button" class="btn btn-primary btn-sm"
+                                        data-toggle="modal"
+                                        data-target="#modalMetodoPago{{ $ingreso->id }}"
+                                        title="Editar Método de Pago">
+                                        <i class="fas fa-credit-card"></i>
+                                    </button>
                                     <form action="{{ route('ingresos.destroy', $ingreso->id) }}" method="POST"
                                         style="display: inline;" class="form-eliminar">
                                         @csrf
@@ -127,7 +134,39 @@
 
         </section>
     </div>
-
+    @foreach ($ingresos as $ingreso)
+<!-- Modal editar método de pago -->
+<div class="modal fade" id="modalMetodoPago{{ $ingreso->id }}" tabindex="-1" role="dialog" aria-labelledby="modalMetodoPagoLabel{{ $ingreso->id }}" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <form action="{{ route('ingresos.update', $ingreso->id) }}" method="POST">
+            @csrf
+            @method('PUT')
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalMetodoPagoLabel{{ $ingreso->id }}">Editar Método de Pago</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label>Método de Pago</label>
+                        <select name="metodo_pago" class="form-control" required>
+                            <option value="Efectivo" {{ $ingreso->metodo_pago == 'Efectivo' ? 'selected' : '' }}>Efectivo</option>
+                            <option value="Banco" {{ $ingreso->metodo_pago == 'Banco' ? 'selected' : '' }}>Banco</option>
+                            <option value="Por cobrar" {{ $ingreso->metodo_pago == 'Por cobrar' ? 'selected' : '' }}>Por cobrar</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-primary">Guardar</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+@endforeach
     <!-- Modal de Nuevo Ingreso -->
     <div class="modal fade" id="modalNuevoIngreso" tabindex="-1" role="dialog" aria-labelledby="modalNuevoIngresoLabel"
         aria-hidden="true">
