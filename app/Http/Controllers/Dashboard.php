@@ -21,6 +21,7 @@ class Dashboard extends Controller
         // Métricas financieras
         $totalIngresos = \App\Models\Ingreso::sum('total') ?? 0;
         $totalEgresos = \App\Models\Egreso::sum('total') ?? 0;
+        $totalUtilidad = $totalIngresos - $totalEgresos;
         $ingresosMes = \App\Models\Ingreso::whereMonth('created_at', now()->month)
                                          ->whereYear('created_at', now()->year)
                                          ->sum('total') ?? 0;
@@ -55,7 +56,8 @@ class Dashboard extends Controller
             'totalClientes', 'totalRecepciones', 'totalUsuarios', 'totalEquipos', 'totalCotizaciones',
             'totalIngresos', 'totalEgresos', 'ingresosMes', 'egresosMes',
             'recepcionesPendientes', 'recepcionesEnProceso', 'recepcionesCompletadas',
-            'cotizacionesMes', 'recepcionesRecientes', 'equiposPorTipo'
+            'cotizacionesMes', 'recepcionesRecientes', 'equiposPorTipo',
+            'totalUtilidad'
         ));
     }
 }

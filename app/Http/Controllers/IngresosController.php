@@ -84,7 +84,19 @@ class IngresosController extends Controller
     }
 
     public function update(Request $request, $id)
-    {
+    {   
+
+       $ingreso = \App\Models\Ingreso::findOrFail($id);
+
+    // Si solo se envía metodo_pago, actualiza solo ese campo
+    if ($request->has('metodo_pago') && count($request->all()) == 3) { // _token y _method también llegan
+        $request->validate([
+            'metodo_pago' => 'required|in:Efectivo,Banco,Por cobrar',
+        ]);
+        $ingreso->update(['metodo_pago' => $request->metodo_pago]);
+        return redirect()->route('ingresos.index')->with('success', 'Método de pago actualizado exitosamente.');
+    }
+
         // Lógica para actualizar un ingreso existente
         $data = $request->validate([
             'tipo_ingreso' => 'required|string|max:255',
