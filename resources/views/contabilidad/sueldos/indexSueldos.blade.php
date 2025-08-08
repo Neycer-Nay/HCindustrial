@@ -99,9 +99,9 @@
                 <p style="font-size: 1.2em;">Puedes exportar los sueldos en formato Excel y PDF.</p>
             </div>
             <div class="table-responsive">
-                <table class="table table-striped" id="table-sueldos">
+                <table class="table table-striped table-sm" id="table-sueldos">
                     <thead>
-                        <tr>
+                        <tr class="thead-dark">
                             <th>Fecha Pago</th>
                             <th>Trabajador</th>
                             <th>Cargo</th>

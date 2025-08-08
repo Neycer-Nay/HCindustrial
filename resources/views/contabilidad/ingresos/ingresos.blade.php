@@ -17,7 +17,6 @@
             <!-- Tarjeta de Totales -->
             <div class="section-body">
                 <div class="row mb-4">
-
                     <div class="col-lg-4 col-md-6 col-sm-6 col-12">
                         <div class="card card-statistic-1">
                             <div class="card-icon bg-success">
@@ -66,10 +65,10 @@
                 </div>
                 <p style="font-size: 1.2em;">Puedes exportar los ingresos en formato Excel y PDF.</p>
             </div>
-            <div class=" d-md-block table-responsive">
-                <table class="table table-striped" id="table-ingresos">
+            <div class=" table-responsive">
+                <table class="table table-striped table-sm" id="table-ingresos">
                     <thead>
-                        <tr>
+                        <tr class="thead-dark">
 
                             <th>Fecha</th>
                             <th>Tipo de Ingreso</th>
