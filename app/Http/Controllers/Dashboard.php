@@ -28,7 +28,9 @@ class Dashboard extends Controller
         $egresosMes = \App\Models\Egreso::whereMonth('created_at', now()->month)
                                         ->whereYear('created_at', now()->year)
                                         ->sum('total') ?? 0;
-        
+
+        $totalUtilidadMes = $ingresosMes - $egresosMes;
+
         // Estadísticas de recepciones por estado
         $recepcionesPendientes = \App\Models\Recepcion::where('estado', 'Pendiente')->count();
         $recepcionesEnProceso = \App\Models\Recepcion::where('estado', 'En proceso')->count();
@@ -57,7 +59,7 @@ class Dashboard extends Controller
             'totalIngresos', 'totalEgresos', 'ingresosMes', 'egresosMes',
             'recepcionesPendientes', 'recepcionesEnProceso', 'recepcionesCompletadas',
             'cotizacionesMes', 'recepcionesRecientes', 'equiposPorTipo',
-            'totalUtilidad'
+            'totalUtilidad', 'totalUtilidadMes'
         ));
     }
 }
