@@ -164,4 +164,29 @@ class UsuariosController extends Controller
             return $next($request);
         });
     }
+
+    public function toggle($id)
+    {
+        $user = User::findOrFail($id);
+
+        // Solo Gerente puede activar/desactivar y no puede hacerlo a otros Gerentes
+        if (auth()->user()->rol !== 'Gerente' || $user->rol === 'Gerente') {
+            return redirect()->route('usuarios.index')
+                ->with('swal', [
+                    'icon' => 'error',
+                    'title' => 'Operación no permitida',
+                    'text' => 'No puedes activar/desactivar este usuario.'
+                ]);
+        }
+
+        $user->activo = !$user->activo;
+        $user->save();
+
+        return redirect()->route('usuarios.index')
+            ->with('swal', [
+                'icon' => 'success',
+                'title' => $user->activo ? 'Usuario activado' : 'Usuario desactivado',
+                'text' => 'El usuario ha sido ' . ($user->activo ? 'activado' : 'desactivado') . ' correctamente.'
+            ]);
+    }
 }

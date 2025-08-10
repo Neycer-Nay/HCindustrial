@@ -4,9 +4,9 @@
     <div class="main-content">
         <section class="section">
             <div class="section-header">
-                <h1 style="color:#151414">Panel de Control - HC Servicios Industrial</h1>
+                <h1 style="color:#151414">Panel de Control - HC Servicio Industrial</h1>
                 <div class="section-header-breadcrumb">
-                    <div class="breadcrumb-item active">Dashboard</div>
+                    
                 </div>
             </div>
 

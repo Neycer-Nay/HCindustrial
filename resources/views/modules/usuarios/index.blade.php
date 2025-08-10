@@ -52,6 +52,19 @@
                                                                     class="fas fa-trash"></i>
                                                                 Eliminar</button>
                                                         </form>
+                                                        @if(auth()->user()->rol === 'Gerente' && $user->rol !== 'Gerente')
+                                                            <form action="{{ route('usuarios.toggle', $user->id) }}" method="POST"
+                                                                style="display:inline-block;">
+                                                                @csrf
+                                                                @method('PATCH')
+                                                                <button type="submit"
+                                                                    class="btn btn-{{ $user->activo ? 'secondary' : 'success' }} btn-sm"
+                                                                    title="{{ $user->activo ? 'Desactivar' : 'Activar' }}">
+                                                                    <i class="fas fa-toggle-{{ $user->activo ? 'on' : 'off' }}"></i>
+                                                                    {{ $user->activo ? 'Desactivar' : 'Activar' }}
+                                                                </button>
+                                                            </form>
+                                                        @endif
                                                     </td>
                                                 </tr>
                                             @endforeach
@@ -84,6 +97,17 @@
                             <button type="submit" class="btn btn-danger btn-sm delete-btn"
                                 data-name="{{ $user->nombre ?? 'usuario' }}"><i class="fas fa-trash"></i> Eliminar</button>
                         </form>
+                        @if(auth()->user()->rol === 'Gerente' && $user->rol !== 'Gerente')
+                            <form action="{{ route('usuarios.toggle', $user->id) }}" method="POST" style="display:inline-block;">
+                                @csrf
+                                @method('PATCH')
+                                <button type="submit" class="btn btn-{{ $user->activo ? 'secondary' : 'success' }} btn-sm"
+                                    title="{{ $user->activo ? 'Desactivar' : 'Activar' }}">
+                                    <i class="fas fa-toggle-{{ $user->activo ? 'on' : 'off' }}"></i>
+                                    {{ $user->activo ? 'Desactivar' : 'Activar' }}
+                                </button>
+                            </form>
+                        @endif
                     </div>
                 </div>
             </div>
@@ -212,7 +236,7 @@
                 $('#usuarioModal').modal('show');
                 $('.is-invalid').first().focus();
             @endif
-                        });
+                                });
     </script>
 
     @if($users->isEmpty() && request('buscar'))

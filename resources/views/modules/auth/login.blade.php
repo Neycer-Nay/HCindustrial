@@ -6,8 +6,8 @@
     <div class="row">
       <div class="col-12 col-sm-8 offset-sm-2 col-md-6 offset-md-3 col-lg-6 offset-lg-3 col-xl-4 offset-xl-4">
       <div class="login-brand">
-        <!--<h2>HC BOBINADOS INDUSTRIALES</h2>-->
-        <img src="{{ asset('dist/assets/img/logo.jpeg') }}" alt="logo" width="300" class="shadow-light ">
+        <!--<h2>HC BOBINADOS INDUSTRIALES</h2>--> 
+        <img src="{{ asset('dist/assets/img/logo.png') }}" alt="logo" width="300" >
       </div>
       <div class="card card-secondary">
         <div class="card-header">

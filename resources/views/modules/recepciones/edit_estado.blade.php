@@ -34,7 +34,7 @@
                                     </p>
                                     <p><strong><i class="fas fa-user-tie"></i> Atendido por:</strong>
                                         {{ optional($recepcion->usuario)->nombre ?? 'N/A' }}</p>
-                                    
+
 
                                 </div>
                                 <div class="col-md-6">
@@ -43,7 +43,7 @@
                                     </p>
                                     <p><strong><i class="fas fa-clock"></i> Hora Recepción:</strong>
                                         {{ \Carbon\Carbon::parse($recepcion->hora_ingreso)->format('H:i') }}</p>
-                                    
+
                                 </div>
                                 <div class="col-12 mt-2">
                                     <p><strong><i class="fas fa-sticky-note"></i> Observaciones de la Recepción:</strong>
@@ -360,17 +360,14 @@
                         </div>
 
                         <!-- Botones de acción -->
-                        <div class="row mt-4">
-                            <div class="col-12">
-                                <div class="text-right">
-                                    <a href="{{ route('recepciones.index', $recepcion) }}" class="btn btn-secondary">
-                                        <i class="fas fa-arrow-left"></i> Cancelar
-                                    </a>
-                                    <button type="submit" class="btn btn-primary">
-                                        <i class="fas fa-save"></i> Guardar Cambios
-                                    </button>
-                                </div>
-                            </div>
+                        <div class="text-center mb-3">
+                            <a href="{{ route('recepciones.index', $recepcion) }}" class="btn btn-secondary">
+                                <i class="fas fa-arrow-left"></i> Cancelar
+                            </a>
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-save"></i> Guardar Cambios
+                            </button>
+
                         </div>
                 </form>
             </div>
@@ -890,19 +887,19 @@
                             const div = document.createElement('div');
                             div.className = 'preview-item';
                             div.innerHTML = `
-                                                <img src="${e.target.result}" onclick="showImageModal('${e.target.result}')" title="Clic para ver en tamaño completo">
-                                                <div class="preview-controls">
-                                                    <button type="button" class="btn btn-warning btn-sm" onclick="openPhotoEditor('${e.target.result}', ${index}, 'file', ${fileIndex})" title="Editar foto">
-                                                        <i style="font-size: 20px;" class="fas fa-crop"></i>
-                                                    </button>
-                                                    <button type="button" class="btn btn-danger btn-sm" onclick="removePreview(this)" title="Eliminar foto">
-                                                        <i style="font-size: 20px;" class="fas fa-times"></i>
-                                                    </button>
-                                                </div>
-                                                <div class="preview-badge">
-                                                    <i class="fas fa-file"></i> Nueva
-                                                </div>
-                                            `;
+                                                    <img src="${e.target.result}" onclick="showImageModal('${e.target.result}')" title="Clic para ver en tamaño completo">
+                                                    <div class="preview-controls">
+                                                        <button type="button" class="btn btn-warning btn-sm" onclick="openPhotoEditor('${e.target.result}', ${index}, 'file', ${fileIndex})" title="Editar foto">
+                                                            <i style="font-size: 20px;" class="fas fa-crop"></i>
+                                                        </button>
+                                                        <button type="button" class="btn btn-danger btn-sm" onclick="removePreview(this)" title="Eliminar foto">
+                                                            <i style="font-size: 20px;" class="fas fa-times"></i>
+                                                        </button>
+                                                    </div>
+                                                    <div class="preview-badge">
+                                                        <i class="fas fa-file"></i> Nueva
+                                                    </div>
+                                                `;
                             previewContainer.appendChild(div);
 
                             // Ocultar estado vacío
@@ -1001,22 +998,22 @@
                         fullscreenContainer = document.createElement('div');
                         fullscreenContainer.className = 'camera-fullscreen';
                         fullscreenContainer.innerHTML = `
-                                            <div class="camera-info">
-                                                <i class="fas fa-camera"></i> Equipo #${index + 1} - Tomar Foto
-                                            </div>
-                                            <button class="close-btn" onclick="closeCameraFullscreen(${index})">
-                                                <i class="fas fa-times"></i>
-                                            </button>
-                                            <video id="fullscreenVideo${index}" autoplay playsinline></video>
-                                            <div class="controls">
-                                                <button type="button" class="btn btn-success btn-lg" onclick="captureFullscreenPhoto(${index})">
-                                                    <i class="fas fa-camera"></i> Capturar
+                                                <div class="camera-info">
+                                                    <i class="fas fa-camera"></i> Equipo #${index + 1} - Tomar Foto
+                                                </div>
+                                                <button class="close-btn" onclick="closeCameraFullscreen(${index})">
+                                                    <i class="fas fa-times"></i>
                                                 </button>
-                                                <button type="button" class="btn btn-danger btn-lg" onclick="closeCameraFullscreen(${index})">
-                                                    <i class="fas fa-times"></i> Cancelar
-                                                </button>
-                                            </div>
-                                        `;
+                                                <video id="fullscreenVideo${index}" autoplay playsinline></video>
+                                                <div class="controls">
+                                                    <button type="button" class="btn btn-success btn-lg" onclick="captureFullscreenPhoto(${index})">
+                                                        <i class="fas fa-camera"></i> Capturar
+                                                    </button>
+                                                    <button type="button" class="btn btn-danger btn-lg" onclick="closeCameraFullscreen(${index})">
+                                                        <i class="fas fa-times"></i> Cancelar
+                                                    </button>
+                                                </div>
+                                            `;
 
                         document.body.appendChild(fullscreenContainer);
                         document.body.style.overflow = 'hidden';
@@ -1065,13 +1062,13 @@
                             icon: 'error',
                             title: errorTitle,
                             html: `
-                                                <p>${errorMessage}</p>
-                                                <hr>
-                                                <small><strong>Detalles técnicos:</strong><br>
-                                                ${err.name}: ${err.message}<br>
-                                                Navegador: ${navigator.userAgent.split(' ')[0]}<br>
-                                                Protocolo: ${location.protocol}</small>
-                                            `,
+                                                    <p>${errorMessage}</p>
+                                                    <hr>
+                                                    <small><strong>Detalles técnicos:</strong><br>
+                                                    ${err.name}: ${err.message}<br>
+                                                    Navegador: ${navigator.userAgent.split(' ')[0]}<br>
+                                                    Protocolo: ${location.protocol}</small>
+                                                `,
                             width: '500px',
                             confirmButtonText: 'Entendido'
                         });
@@ -1139,19 +1136,19 @@
                             const div = document.createElement('div');
                             div.className = 'preview-item';
                             div.innerHTML = `
-                                                <img src="${e.target.result}" onclick="showImageModal('${e.target.result}')" title="Clic para ver en tamaño completo">
-                                                <div class="preview-controls">
-                                                    <button type="button" class="btn btn-warning btn-sm" onclick="openPhotoEditor('${e.target.result}', ${equipoIndex}, 'camera', ${previewContainer.children.length})" title="Editar foto">
-                                                        <i class="fas fa-crop"></i>
-                                                    </button>
-                                                    <button type="button" class="btn btn-danger btn-sm" onclick="removeCameraPhoto(this, ${equipoIndex}, ${cameraPhotoCount})" title="Eliminar foto">
-                                                        <i class="fas fa-times"></i>
-                                                    </button>
-                                                </div>
-                                                <div class="preview-badge">
-                                                    <i class="fas fa-camera"></i> Cámara
-                                                </div>
-                                            `;
+                                                    <img src="${e.target.result}" onclick="showImageModal('${e.target.result}')" title="Clic para ver en tamaño completo">
+                                                    <div class="preview-controls">
+                                                        <button type="button" class="btn btn-warning btn-sm" onclick="openPhotoEditor('${e.target.result}', ${equipoIndex}, 'camera', ${previewContainer.children.length})" title="Editar foto">
+                                                            <i class="fas fa-crop"></i>
+                                                        </button>
+                                                        <button type="button" class="btn btn-danger btn-sm" onclick="removeCameraPhoto(this, ${equipoIndex}, ${cameraPhotoCount})" title="Eliminar foto">
+                                                            <i class="fas fa-times"></i>
+                                                        </button>
+                                                    </div>
+                                                    <div class="preview-badge">
+                                                        <i class="fas fa-camera"></i> Cámara
+                                                    </div>
+                                                `;
                             previewContainer.appendChild(div);
 
                             // Ocultar estado vacío
@@ -1190,65 +1187,65 @@
             }
 
             // Función global para remover preview (mejorada)
-window.removePreview = function (button) {
-    const previewItem = button.closest('.preview-item');
-    const equipoContainer = previewItem.closest('.equipo-item');
-    const equipoIndex = Array.from(equipoContainer.parentNode.children).indexOf(equipoContainer);
-    
-    // Obtener el índice de la foto eliminada dentro del contenedor de archivos
-    const filePreviewContainer = document.getElementById(`filePreviews${equipoIndex}`);
-    const fileIndex = Array.from(filePreviewContainer.children).indexOf(previewItem);
-    
-    // Obtener el input de archivo
-    const fileInput = document.getElementById(`fileInput${equipoIndex}`);
-    
-    if (fileInput && fileInput.files) {
-        // Crear un nuevo DataTransfer para reconstruir la lista de archivos
-        const dt = new DataTransfer();
-        
-        // Agregar todos los archivos excepto el eliminado
-        Array.from(fileInput.files).forEach((file, index) => {
-            if (index !== fileIndex) {
-                dt.items.add(file);
-            }
-        });
-        
-        // Actualizar el input con los archivos restantes
-        fileInput.files = dt.files;
-        
-        // Actualizar el label del input
-        const label = fileInput.nextElementSibling;
-        if (fileInput.files.length === 0) {
-            label.innerHTML = `
-                <div class="text-center">
-                    <i class="fas fa-cloud-upload-alt d-block mb-2" style="font-size: 1.5rem;"></i>
-                    Toca o haz clic para subir tus fotos
-                </div>
-            `;
-        } else {
-            label.textContent = fileInput.files.length > 1 ? 
-                `${fileInput.files.length} archivos seleccionados` : 
-                fileInput.files[0].name;
-        }
-    }
-    
-    // Animación de salida y eliminación del preview
-    previewItem.style.animation = 'fadeOut 0.3s ease';
-    setTimeout(() => {
-        previewItem.remove();
-        // Verificar si quedan fotos y mostrar estado vacío si es necesario
-        checkEmptyStateAfterRemoval(equipoIndex);
-        
-        // Mostrar mensaje de confirmación
-        Swal.fire({
-            icon: 'info',
-            title: 'Foto eliminada',
-            text: 'La foto ha sido eliminada correctamente.',
-            timer: 1000,
-            showConfirmButton: false
-        });
-    }, 300);
-};
+            window.removePreview = function (button) {
+                const previewItem = button.closest('.preview-item');
+                const equipoContainer = previewItem.closest('.equipo-item');
+                const equipoIndex = Array.from(equipoContainer.parentNode.children).indexOf(equipoContainer);
+
+                // Obtener el índice de la foto eliminada dentro del contenedor de archivos
+                const filePreviewContainer = document.getElementById(`filePreviews${equipoIndex}`);
+                const fileIndex = Array.from(filePreviewContainer.children).indexOf(previewItem);
+
+                // Obtener el input de archivo
+                const fileInput = document.getElementById(`fileInput${equipoIndex}`);
+
+                if (fileInput && fileInput.files) {
+                    // Crear un nuevo DataTransfer para reconstruir la lista de archivos
+                    const dt = new DataTransfer();
+
+                    // Agregar todos los archivos excepto el eliminado
+                    Array.from(fileInput.files).forEach((file, index) => {
+                        if (index !== fileIndex) {
+                            dt.items.add(file);
+                        }
+                    });
+
+                    // Actualizar el input con los archivos restantes
+                    fileInput.files = dt.files;
+
+                    // Actualizar el label del input
+                    const label = fileInput.nextElementSibling;
+                    if (fileInput.files.length === 0) {
+                        label.innerHTML = `
+                    <div class="text-center">
+                        <i class="fas fa-cloud-upload-alt d-block mb-2" style="font-size: 1.5rem;"></i>
+                        Toca o haz clic para subir tus fotos
+                    </div>
+                `;
+                    } else {
+                        label.textContent = fileInput.files.length > 1 ?
+                            `${fileInput.files.length} archivos seleccionados` :
+                            fileInput.files[0].name;
+                    }
+                }
+
+                // Animación de salida y eliminación del preview
+                previewItem.style.animation = 'fadeOut 0.3s ease';
+                setTimeout(() => {
+                    previewItem.remove();
+                    // Verificar si quedan fotos y mostrar estado vacío si es necesario
+                    checkEmptyStateAfterRemoval(equipoIndex);
+
+                    // Mostrar mensaje de confirmación
+                    Swal.fire({
+                        icon: 'info',
+                        title: 'Foto eliminada',
+                        text: 'La foto ha sido eliminada correctamente.',
+                        timer: 1000,
+                        showConfirmButton: false
+                    });
+                }, 300);
+            };
 
             // Función global para remover foto de cámara
             window.removeCameraPhoto = function (button, equipoIndex, photoIndex) {
@@ -1521,9 +1518,9 @@ window.removePreview = function (button) {
                 modal.id = 'imageModal';
                 modal.className = 'image-modal';
                 modal.innerHTML = `
-                                    <span class="image-modal-close" onclick="closeImageModal()">&times;</span>
-                                    <img class="image-modal-content" id="modalImage">
-                                `;
+                                        <span class="image-modal-close" onclick="closeImageModal()">&times;</span>
+                                        <img class="image-modal-content" id="modalImage">
+                                    `;
                 document.body.appendChild(modal);
 
                 // Cerrar modal al hacer clic fuera de la imagen
