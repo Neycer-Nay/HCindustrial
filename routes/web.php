@@ -63,6 +63,7 @@ Route::prefix('usuarios')->middleware('auth')->group(function () {
     Route::get('/{usuario}/edit', [\App\Http\Controllers\UsuariosController::class, 'edit'])->name('usuarios.edit');
     Route::put('/{usuario}', [\App\Http\Controllers\UsuariosController::class, 'update'])->name('usuarios.update');
     Route::delete('/{usuario}', [\App\Http\Controllers\UsuariosController::class, 'destroy'])->name('usuarios.destroy');
+    Route::patch('/{id}/toggle', [\App\Http\Controllers\UsuariosController::class, 'toggle'])->name('usuarios.toggle');
 });
 
 Route::prefix('cotizaciones')->middleware('auth')->group(function () {

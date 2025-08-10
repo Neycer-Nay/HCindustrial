@@ -1959,7 +1959,7 @@ a.dropdown-item {
   --dark: color(dark); }
 
 body {
-  background-color: #fafdfb;
+  background-color: #f2e6b1;
   font-size: 14px;
   font-weight: 400;
   font-family: 'Nunito', 'Segoe UI', arial;
@@ -2329,7 +2329,7 @@ pre {
   top: 0;
   height: 100%;
   width: 250px;
-  background-color: #fff;
+  background-color: #f2e6b1;
   z-index: 880;
   left: 0; }
 
@@ -2353,7 +2353,7 @@ body.sidebar-mini .main-sidebar {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.03);
     content: ' ';
     position: fixed;
-    background-color: #fff;
+    background-color: #f2e6b1;
     width: 65px;
     height: 100%;
     left: 0;

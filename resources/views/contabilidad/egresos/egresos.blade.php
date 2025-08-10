@@ -69,9 +69,9 @@
                 <p style="font-size: 1.2em;">Puedes exportar los egresos en formato Excel y PDF.</p>
             </div>
             <div class="table-responsive">
-                <table class="table table-striped" id="table-egresos">
-                    <thead>
-                        <tr>
+                <table class="table table-striped table-sm" id="table-egresos">
+                    <thead >
+                        <tr class="thead-dark">
                             <th>Fecha</th>
                             <th>Nombre Cuenta</th>
                             <th>Glosa</th>
@@ -93,7 +93,7 @@
                                 <td>{{ $egreso->cuenta->nombre_cuenta }}</td>
                                 <td>{{ $egreso->glosa }}</td>
                                 <td>{{ $egreso->razon_social }}</td>
-                                <td>{{ $egreso->nro_factura }}</td>
+                                <td>{{ Str::upper($egreso->nro_factura) }}</td>
                                 <td>{{ $egreso->responsable }}</td>
                                 <td>{{ $egreso->metodo_pago }}</td>
                                 <td>{{ number_format($egreso->subtotal, 2) }}</td>

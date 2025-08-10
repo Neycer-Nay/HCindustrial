@@ -255,21 +255,21 @@
                                 </div>
                             </div>
                         </div>
+                         <div class="text-right mb-3">
+                                <a href="{{ route('cotizaciones.index') }}" class="btn btn-secondary">
+                                    <i class="fas fa-arrow-left"></i> Cancelar
+                                </a>
+                                <button type="submit" class="btn btn-warning">
+                                    <i class="fas fa-save"></i> Actualizar Cotización
+                                </button>
+                            
+                        </div>
+                    
                     @endforeach
 
                     <!-- Botones de acción -->
-                    <div class="fixed-bottom bg-white p-3 shadow-lg border-top">
-                        <div class="container-fluid">
-                            <div class="d-flex justify-content-between">
-                                <a href="{{ route('cotizaciones.index') }}" class="btn btn-secondary">
-                                    <i class="fas fa-arrow-left"></i> Volver
-                                </a>
-                                <button type="submit" class="btn btn-success">
-                                    <i class="fas fa-save"></i> Actualizar Cotización
-                                </button>
-                            </div>
-                        </div>
-                    </div>
+                    
+                       
                 </form>
             </div>
         </section>

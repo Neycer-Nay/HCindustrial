@@ -100,7 +100,7 @@
                     </tbody>
                     @if(count($libroDiario) > 0)
                         <tfoot>
-                            <tr>
+                            <tr style="background-color: #f8f9fa; font-weight: bold; border-top: 2px solid #dee2e6;">
                                 <th colspan="6" class="text-right">TOTALES:</th>
                                 <th>{{ number_format($totalIngresos, 2) }} Bs</th>
                                 <th>{{ number_format($totalEgresos, 2) }} Bs</th>

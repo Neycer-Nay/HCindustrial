@@ -28,7 +28,9 @@ class AuthController extends Controller
         if (!Hash::check($request->password, (string) $user->password)) {
             return back()->withErrors(['email' => 'Contraseña incorrecta.'])->withInput();
         }
-        
+        if (!$user->activo) {
+            return back()->withErrors(['email' => 'Usuario inactivo.'])->withInput();
+        }
 
         Auth::login($user);
         $request->session()->regenerate();

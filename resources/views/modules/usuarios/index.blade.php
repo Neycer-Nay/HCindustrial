@@ -4,77 +4,120 @@
     <div class="main-content">
         <section class="section">
             <div class="section-header">
-                <h1 style="color:#151414" >Usuarios</h1>
+                <h1 style="color:#151414">Usuarios</h1>
                 <div class="section-header-breadcrumb">
                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#usuarioModal">
                         <i class="fas fa-plus"></i> Nuevo Usuario
                     </button>
                 </div>
             </div>
-            <!-- Tabla para pantallas medianas y grandes -->
-            <div class="d-none d-md-block">
-                <table class="table table-striped" id="table-1">
-                    <thead>
-                        <tr>
-                            <th></th>
-                            <th>Nombre</th>
-                            <th>Correo</th>
-                            <th>Rol</th>
-                            <th>Acciones</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach($users as $user)
-                            <tr>
-                                <td>{{ $loop->iteration }}</td>
-                                <td>{{ $user->nombre }}</td>
-                                <td>{{ $user->email }}</td>
-                                <td>{{ $user->rol }}</td>
-                                <td>
-                                    <a href="{{ route('usuarios.edit', $user->id) }}" class="btn btn-warning btn-sm"
-                                        title="Editar"><i class="fas fa-edit"></i> Editar</a>
-                                    <form action="{{ route('usuarios.destroy', $user->id) }}" method="POST"
-                                        style="display:inline-block;">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="btn btn-danger btn-sm delete-btn"
-                                            data-name="{{ $user->nombre ?? 'usuario' }}"><i class="fas fa-trash"></i> Eliminar</button>
-                                    </form>
-                                </td>
-                            </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-            </div>
-            
-            <!-- Tarjetas para pantallas pequeñas -->
-            <div class="d-block d-md-none">
-                @foreach($users as $user)
-                    <div class="card mb-2">
-                        <div class="card-body p-2">
-                            <h5 class="card-title mb-1">{{ $user->nombre }}</h5>
-                            <p class="mb-1"><strong>Correo:</strong> {{ $user->email }}</p>
-                            <p class="mb-1"><strong>Rol:</strong> {{ $user->rol }}</p>
-                            <div>
-                                <a href="{{ route('usuarios.edit', $user->id) }}" class="btn btn-warning btn-sm"
-                                    title="Editar"><i class="fas fa-edit"></i> Editar</a>
-                                <form action="{{ route('usuarios.destroy', $user->id) }}" method="POST"
-                                    style="display:inline-block;">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="btn btn-danger btn-sm delete-btn"
-                                        data-name="{{ $user->nombre ?? 'usuario' }}"><i class="fas fa-trash"></i> Eliminar</button>
-                                </form>
+            <div class="section-body">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4 style="font-size:21px">Lista de usuarios</h4>
+                            </div>
+                            <!-- Tabla para pantallas medianas y grandes -->
+                            <div class="card-body">
+                                <div class="table-responsive"></div>
+                                <div class="d-none d-md-block">
+                                    <table class="table table-striped" id="table-1">
+                                        <thead>
+                                            <tr>
+                                                <th></th>
+                                                <th>Nombre</th>
+                                                <th>Correo</th>
+                                                <th>Rol</th>
+                                                <th>Acciones</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach($users as $user)
+                                                <tr>
+                                                    <td>{{ $loop->iteration }}</td>
+                                                    <td>{{ $user->nombre }}</td>
+                                                    <td>{{ $user->email }}</td>
+                                                    <td>{{ $user->rol }}</td>
+                                                    <td>
+                                                        <a href="{{ route('usuarios.edit', $user->id) }}"
+                                                            class="btn btn-warning btn-sm" title="Editar"><i
+                                                                class="fas fa-edit"></i> Editar</a>
+                                                        <form action="{{ route('usuarios.destroy', $user->id) }}" method="POST"
+                                                            style="display:inline-block;">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <button type="submit" class="btn btn-danger btn-sm delete-btn"
+                                                                data-name="{{ $user->nombre ?? 'usuario' }}"><i
+                                                                    class="fas fa-trash"></i>
+                                                                Eliminar</button>
+                                                        </form>
+                                                        @if(auth()->user()->rol === 'Gerente' && $user->rol !== 'Gerente')
+                                                            <form action="{{ route('usuarios.toggle', $user->id) }}" method="POST"
+                                                                style="display:inline-block;">
+                                                                @csrf
+                                                                @method('PATCH')
+                                                                <button type="submit"
+                                                                    class="btn btn-{{ $user->activo ? 'secondary' : 'success' }} btn-sm"
+                                                                    title="{{ $user->activo ? 'Desactivar' : 'Activar' }}">
+                                                                    <i class="fas fa-toggle-{{ $user->activo ? 'on' : 'off' }}"></i>
+                                                                    {{ $user->activo ? 'Desactivar' : 'Activar' }}
+                                                                </button>
+                                                            </form>
+                                                        @endif
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
                     </div>
-                @endforeach
+                </div>
             </div>
-            <div class="d-flex justify-content-center">
-                {{ $users->links('pagination::bootstrap-4') }}
-            </div>
+    </div>
 
-        </section>
+    </div>
+
+    <!-- Tarjetas para pantallas pequeñas -->
+    <div class="d-block d-md-none">
+        @foreach($users as $user)
+            <div class="card mb-2">
+                <div class="card-body p-2">
+                    <h5 class="card-title mb-1">{{ $user->nombre }}</h5>
+                    <p class="mb-1"><strong>Correo:</strong> {{ $user->email }}</p>
+                    <p class="mb-1"><strong>Rol:</strong> {{ $user->rol }}</p>
+                    <div>
+                        <a href="{{ route('usuarios.edit', $user->id) }}" class="btn btn-warning btn-sm" title="Editar"><i
+                                class="fas fa-edit"></i> Editar</a>
+                        <form action="{{ route('usuarios.destroy', $user->id) }}" method="POST" style="display:inline-block;">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-danger btn-sm delete-btn"
+                                data-name="{{ $user->nombre ?? 'usuario' }}"><i class="fas fa-trash"></i> Eliminar</button>
+                        </form>
+                        @if(auth()->user()->rol === 'Gerente' && $user->rol !== 'Gerente')
+                            <form action="{{ route('usuarios.toggle', $user->id) }}" method="POST" style="display:inline-block;">
+                                @csrf
+                                @method('PATCH')
+                                <button type="submit" class="btn btn-{{ $user->activo ? 'secondary' : 'success' }} btn-sm"
+                                    title="{{ $user->activo ? 'Desactivar' : 'Activar' }}">
+                                    <i class="fas fa-toggle-{{ $user->activo ? 'on' : 'off' }}"></i>
+                                    {{ $user->activo ? 'Desactivar' : 'Activar' }}
+                                </button>
+                            </form>
+                        @endif
+                    </div>
+                </div>
+            </div>
+        @endforeach
+    </div>
+    <div class="d-flex justify-content-center">
+        {{ $users->links('pagination::bootstrap-4') }}
+    </div>
+
+    </section>
     </div>
 
     <!-- Modal -->
@@ -193,7 +236,7 @@
                 $('#usuarioModal').modal('show');
                 $('.is-invalid').first().focus();
             @endif
-                });
+                                });
     </script>
 
     @if($users->isEmpty() && request('buscar'))
