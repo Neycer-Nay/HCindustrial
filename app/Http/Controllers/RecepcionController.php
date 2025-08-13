@@ -137,6 +137,7 @@ class RecepcionController extends Controller
                     'cable_negativo' => $equipoData['cable_negativo'] ?? null,
                     'kva_kw' => $equipoData['kva_kw'] ?? null,
                     'potencia' => $equipoData['potencia'] ?? null,
+                    'potencia_unidad' => $equipoData['potencia_unidad'],
                     //Desabilitar campos que no se usan temporalmente
                     //'partes_faltantes' => $equipoData['partes_faltantes'] ?? null,
                     //'observaciones' => $equipoData['observaciones'] ?? null,
@@ -254,6 +255,7 @@ class RecepcionController extends Controller
                         'cable_negativo' => $equipoData['cable_negativo'] ?? null,
                         'kva_kw' => $equipoData['kva_kw'] ?? null,
                         'potencia' => $equipoData['potencia'] ?? null,
+                        'potencia_unidad' => $equipoData['potencia_unidad'] ?? null,
                     ]);
                 }
             } else {
@@ -276,6 +278,7 @@ class RecepcionController extends Controller
                     'cable_negativo' => $equipoData['cable_negativo'] ?? null,
                     'kva_kw' => $equipoData['kva_kw'] ?? null,
                     'potencia' => $equipoData['potencia'] ?? null,
+                    'potencia_unidad' => $equipoData['potencia_unidad'] ?? null,
                 ]);
                 $equipo->save();
             }
