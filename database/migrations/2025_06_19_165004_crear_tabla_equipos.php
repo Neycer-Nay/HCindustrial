@@ -18,7 +18,8 @@ return new class extends Migration
             $table->string('marca');
             $table->string('color')->nullable();
             $table->string('numero_serie')->nullable();
-            $table->string('potencia')->nullable(); // Para OTROS
+            $table->string('potencia')->nullable();
+            $table->enum('potencia_unidad', ['Watts', 'kW', 'HP/CV']); // Unidad de potencia
             $table->string('voltaje')->nullable(); // Común a varios tipos
             
             // Campos específicos para MOTOR_ELECTRICO

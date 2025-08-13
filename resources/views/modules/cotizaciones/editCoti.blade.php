@@ -99,7 +99,13 @@
                                                     <li><strong>Hz:</strong> {{ $equipo->hz ?? 'N/A' }}</li>
                                                     <li><strong>Kva/Kw:</strong> {{ $equipo->kva_kw ?? 'N/A' }}</li>
                                                 @else
-                                                    <li><strong>Potencia:</strong> {{ $equipo->potencia ?? 'N/A' }}</li>
+                                                    <li>
+                                                    <strong>Potencia:</strong>
+                                                    {{ $equipo->potencia ?? 'N/A' }}
+                                                    @if($equipo->potencia_unidad)
+                                                    <span>{{ $equipo->potencia_unidad ?? 'N/A'}}</span>
+                                                    @endif
+                                                </li>
                                                 @endif
                                             </ul>
 

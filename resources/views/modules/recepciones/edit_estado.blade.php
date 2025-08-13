@@ -222,7 +222,11 @@
                                                 <div class="form-group col-md-3">
                                                     <label><strong>Potencia</strong></label>
                                                     <input type="number" class="form-control" name="equipos[{{ $index }}][potencia]"
-                                                        value="{{ $equipo->potencia }}">
+                                                        value="{{ $equipo->potencia }}"><select class="form-control" name="equipos[__INDEX__][potencia_unidad]">
+                                                        <option value="Watts">Watts</option>
+                                                        <option value="HP/CV">HP/CV</option>
+                                                        <option value="KW">KW</option>
+                                                    </select>
                                                 </div>
                                             @endif
 

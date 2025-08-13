@@ -117,7 +117,13 @@
                                                         <li><strong>Modelo:</strong> {{ $equipo->modelo ?? 'N/A' }}</li>
                                                         <li><strong>Color:</strong> {{ $equipo->color ?? 'N/A' }}</li>
                                                         <li><strong>Voltaje:</strong> {{ $equipo->voltaje ?? 'N/A' }}</li>
-                                                        <li><strong>Potencia:</strong> {{ $equipo->potencia ?? 'N/A' }}</li>
+                                                        <li>
+                                                            <strong>Potencia:</strong>
+                                                            {{ $equipo->potencia ?? 'N/A' }}
+                                                            @if($equipo->potencia_unidad)
+                                                                <span>{{ $equipo->potencia_unidad ?? 'N/A'}}</span>
+                                                            @endif
+                                                        </li>
                                                     @endif
                                                 </ul>
 

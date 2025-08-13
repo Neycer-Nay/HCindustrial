@@ -125,7 +125,13 @@
                 <!-- Otros -->
                 <div class="form-group col-md-3" id="potencia__INDEX__" style="display: none;">
                     <label><strong>Potencia</strong></label>
+                    
                     <input type="number" class="form-control" name="equipos[__INDEX__][potencia]">
+                    <select class="form-control" name="equipos[__INDEX__][potencia_unidad]">
+                        <option value="Watts">Watts</option>
+                        <option value="HP/CV">HP/CV</option>
+                        <option value="KW">KW</option>
+                    </select>
                 </div>
 
                 <!-- Campos que siempre se muestran
@@ -1227,7 +1233,7 @@ window.removePreview = function (button) {
             MOTOR_ELECTRICO: ['hp', 'rpm', 'hz'],
             MAQUINA_SOLDADORA: ['amp', 'cablePositivo', 'cableNegativo'],
             GENERADOR_DINAMO: ['kvaKw', 'hz', 'rpm'],
-            OTROS: ['potencia']
+            OTROS: ['potencia', 'potencia_unidad']
         };
 
         const todosCampos = [...campos.comunes, ...campos.MOTOR_ELECTRICO, ...campos.MAQUINA_SOLDADORA,
