@@ -6,7 +6,7 @@
             <div class="section-header">
                 <h1 style="color:#151414">Recepcion de equipos</h1>
                 <div class="section-header-breadcrumb">
-                    
+
                 </div>
             </div>
             <div class="section-body">
