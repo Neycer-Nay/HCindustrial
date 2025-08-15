@@ -164,19 +164,22 @@
                                                 </div>
 
                                                 <!-- Cable Positivo -->
+                                                <!-- Cable + -->
                                                 <div class="form-group col-md-3">
                                                     <label><strong>Cable +</strong></label>
-                                                    <input type="text" class="form-control"
-                                                        name="equipos[{{ $index }}][cable_positivo]"
-                                                        value="{{ $equipo->cable_positivo }}">
+                                                    <select class="form-control" name="equipos[{{ $index }}][cable_positivo]">
+                                                        <option value="No" {{ $equipo->cable_positivo == 'No' ? 'selected' : '' }}>No</option>
+                                                        <option value="Si" {{ $equipo->cable_positivo == 'Si' ? 'selected' : '' }}>Sí</option>
+                                                    </select>
                                                 </div>
 
                                                 <!-- Cable Negativo -->
                                                 <div class="form-group col-md-3">
                                                     <label><strong>Cable -</strong></label>
-                                                    <input type="text" class="form-control"
-                                                        name="equipos[{{ $index }}][cable_negativo]"
-                                                        value="{{ $equipo->cable_negativo }}">
+                                                    <select class="form-control" name="equipos[{{ $index }}][cable_negativo]">
+                                                        <option value="No" {{ $equipo->cable_negativo == 'No' ? 'selected' : '' }}>No</option>
+                                                        <option value="Si" {{ $equipo->cable_negativo == 'Si' ? 'selected' : '' }}>Sí</option>
+                                                    </select>
                                                 </div>
                                             @endif
 

@@ -61,16 +61,17 @@
                 <div class="form-group col-md-4" id="color__INDEX__" style="display: none;">
                     <label><strong>Colores</strong><span class="text-danger">*</span></label>
                     <select class="form-control select-colores" name="equipos[__INDEX__][color][]" multiple>
+                        <option value="Inox">Inox</option>
+                        <option value="Negro">Negro</option>
+                        <option value="Blanco">Blanco</option>
+                        <option value="Gris">Gris</option>
                         <option value="Rojo">Rojo</option>
                         <option value="Azul">Azul</option>
                         <option value="Verde">Verde</option>
                         <option value="Amarillo">Amarillo</option>
                         <option value="Naranja">Naranja</option>
                         <option value="Morado">Morado</option>
-                        <option value="Rosado">Rosado</option>
-                        <option value="Negro">Negro</option>
-                        <option value="Blanco">Blanco</option>
-                        <option value="Gris">Gris</option>
+                        <option value="Rosado">Rosado</option>                        
                         <option value="Marrón">Marrón</option>
                         <option value="Cian">Cian</option>
                     </select>
@@ -107,13 +108,18 @@
                 </div>
                 <div class="form-group col-md-3" id="cablePositivo__INDEX__" style="display: none;">
                     <label><strong>Cable +</strong></label>
-                    <input type="text" class="form-control" name="equipos[__INDEX__][cable_positivo]" value="No incluye"
-                        readonly>
+                    <select class="form-control" name="equipos[__INDEX__][cable_positivo]">
+                        <option value="No">No</option>
+                        <option value="Si">Sí</option>
+                    </select>
                 </div>
+                <!-- Cable - -->
                 <div class="form-group col-md-3" id="cableNegativo__INDEX__" style="display: none;">
                     <label><strong>Cable -</strong></label>
-                    <input type="text" class="form-control" name="equipos[__INDEX__][cable_negativo]" value="No incluye"
-                        readonly>
+                    <select class="form-control" name="equipos[__INDEX__][cable_negativo]">
+                        <option value="No">No</option>
+                        <option value="Si">Sí</option>
+                    </select>
                 </div>
 
                 <!-- Generador/Dinamo -->
@@ -559,6 +565,7 @@
             font-size: 16px;
         }
     }
+    
 </style>
 
 <script>
