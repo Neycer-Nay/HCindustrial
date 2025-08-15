@@ -79,16 +79,16 @@ class RecepcionController extends Controller
             'equipos.*.marca' => 'required|string|max:255',
             'equipos.*.nombre' => 'required|string|max:255',
             'equipos.*.color' => 'required|array|min:1|max:2',
-            'equipos.*.color.*' => 'required|in:Rojo,Azul,Verde,Amarillo,Naranja,Morado,Rosado,Negro,Blanco,Gris,Marrón,Cian',
+            'equipos.*.color.*' => 'required|in:Inox,Negro,Blanco,Gris,Rojo,Azul,Verde,Amarillo,Naranja,Morado,Rosado,Marrón,Cian',
 
             //Aca poner validaciones para las fotos
-            'equipos.*.fotos' => 'nullable|array|max:8',
-            'equipos.*.fotos.*' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:8192',
+            'equipos.*.fotos' => 'nullable|array|max:12',
+            'equipos.*.fotos.*' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:12288',
             'equipos.*.camera_photos' => 'nullable|array',
 
         ], [
             'equipos.required' => 'Debes seleccionar al menos un equipo.',
-            'equipos.*.fotos.max' => 'Cada equipo solo puede tener hasta 8 fotos.',
+            'equipos.*.fotos.max' => 'Cada equipo solo puede tener hasta 12 fotos.',
             'equipos.*.color.required' => 'El campo color es obligatorio para cada equipo.',
             'equipos.*.color.min' => 'Debes seleccionar al menos un color para cada equipo.',
             'equipos.*.color.max' => 'Solo puedes seleccionar hasta 2 colores por equipo.',
@@ -212,8 +212,8 @@ class RecepcionController extends Controller
             'equipos.*.nombre' => 'required|string|max:255',
             'equipos.*.tipo' => 'required|in:MOTOR_ELECTRICO,MAQUINA_SOLDADORA,GENERADOR_DINAMO,OTROS',
             'equipos.*.marca' => 'required|string|max:255',
-            'equipos.*.fotos' => 'nullable|array|max:8',
-            'equipos.*.fotos.*' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:8192',
+            'equipos.*.fotos' => 'nullable|array|max:12',
+            'equipos.*.fotos.*' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:12288',
             'equipos.*.camera_photos' => 'nullable|array',
             'deleted_photos' => 'nullable|string',
         ]);

@@ -61,6 +61,10 @@
                 <div class="form-group col-md-4" id="color__INDEX__" style="display: none;">
                     <label><strong>Colores</strong><span class="text-danger">*</span></label>
                     <select class="form-control select-colores" name="equipos[__INDEX__][color][]" multiple>
+                        <option value="Inox">Inox</option>
+                        <option value="Negro">Negro</option>
+                        <option value="Blanco">Blanco</option>
+                        <option value="Gris">Gris</option>
                         <option value="Rojo">Rojo</option>
                         <option value="Azul">Azul</option>
                         <option value="Verde">Verde</option>
@@ -68,9 +72,6 @@
                         <option value="Naranja">Naranja</option>
                         <option value="Morado">Morado</option>
                         <option value="Rosado">Rosado</option>
-                        <option value="Negro">Negro</option>
-                        <option value="Blanco">Blanco</option>
-                        <option value="Gris">Gris</option>
                         <option value="Marrón">Marrón</option>
                         <option value="Cian">Cian</option>
                     </select>
@@ -107,13 +108,18 @@
                 </div>
                 <div class="form-group col-md-3" id="cablePositivo__INDEX__" style="display: none;">
                     <label><strong>Cable +</strong></label>
-                    <input type="text" class="form-control" name="equipos[__INDEX__][cable_positivo]" value="No incluye"
-                        readonly>
+                    <select class="form-control" name="equipos[__INDEX__][cable_positivo]">
+                        <option value="No">No</option>
+                        <option value="Si">Sí</option>
+                    </select>
                 </div>
+                <!-- Cable - -->
                 <div class="form-group col-md-3" id="cableNegativo__INDEX__" style="display: none;">
                     <label><strong>Cable -</strong></label>
-                    <input type="text" class="form-control" name="equipos[__INDEX__][cable_negativo]" value="No incluye"
-                        readonly>
+                    <select class="form-control" name="equipos[__INDEX__][cable_negativo]">
+                        <option value="No">No</option>
+                        <option value="Si">Sí</option>
+                    </select>
                 </div>
 
                 <!-- Generador/Dinamo -->
@@ -125,7 +131,7 @@
                 <!-- Otros -->
                 <div class="form-group col-md-3" id="potencia__INDEX__" style="display: none;">
                     <label><strong>Potencia</strong></label>
-                    
+
                     <input type="number" class="form-control" name="equipos[__INDEX__][potencia]">
                     <select class="form-control" name="equipos[__INDEX__][potencia_unidad]">
                         <option value="Watts">Watts</option>
@@ -293,6 +299,7 @@
 </div>
 <style>
     /* Estilos mejorados para previsualizaciones */
+
     .preview-container {
         display: flex;
         flex-wrap: wrap;
@@ -411,18 +418,7 @@
         }
     }
 
-    /* Modal para vista ampliada */
-    .image-modal {
-        display: none;
-        position: fixed;
-        z-index: 10000;
-        left: 0;
-        top: 0;
-        width: 100%;
-        height: 100%;
-        background-color: rgba(0, 0, 0, 0.9);
-        animation: fadeIn 0.3s ease;
-    }
+
 
     .image-modal.show {
         display: flex;
@@ -468,20 +464,7 @@
         margin-top: 2rem !important;
     }
 
-    /* Estilo para cámara fullscreen */
-    .camera-fullscreen {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100vw;
-        height: 100vh;
-        background: rgba(0, 0, 0, 0.95);
-        z-index: 9999;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-    }
+
 
     .camera-fullscreen video {
         max-width: 100%;
@@ -492,15 +475,7 @@
         box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
     }
 
-    .camera-fullscreen .controls {
-        position: absolute;
-        bottom: 30px;
-        left: 50%;
-        transform: translateX(-50%);
-        display: flex;
-        gap: 20px;
-        z-index: 10000;
-    }
+
 
     .camera-fullscreen .controls button {
         padding: 15px 25px;
@@ -559,6 +534,51 @@
             font-size: 16px;
         }
     }
+
+    .modal-backdrop {
+        position: relative;
+        z-index: 1080 !important;
+    }
+
+   
+
+    /* Modal para vista ampliada */
+    .image-modal {
+        display: none;
+        position: fixed;
+        z-index: 1030 !important;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.9);
+        animation: fadeIn 0.3s ease;
+    }
+
+    /* Estilo para cámara fullscreen */
+    .camera-fullscreen {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background: rgba(0, 0, 0, 0.95);
+        z-index: 1045;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .camera-fullscreen .controls {
+        position: absolute;
+        bottom: 30px;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        gap: 20px;
+        z-index: 1046;
+    }
 </style>
 
 <script>
@@ -605,7 +625,7 @@
             const previewContainer = document.getElementById(`filePreviews${index}`);
             const cameraPreviewContainer = document.getElementById(`cameraPreviews${index}`);
             previewContainer.innerHTML = '';
-            const MAX_SIZE_MB = 8;
+            const MAX_SIZE_MB = 12;
             const MAX_SIZE_BYTES = MAX_SIZE_MB * 1024 * 1024;
 
             // ✅ VALIDAR TOTAL DE FOTOS (ARCHIVOS + CÁMARA)
@@ -613,11 +633,11 @@
             const totalFilePhotos = input.files ? input.files.length : 0;
             const totalPhotos = totalFilePhotos + totalCameraPhotos;
 
-            if (totalPhotos > 8) {
+            if (totalPhotos > 12) {
                 Swal.fire({
                     icon: 'error',
                     title: 'Límite de fotos superado',
-                    text: `No puedes seleccionar más fotos. Ya tienes ${totalCameraPhotos} fotos de cámara y ${totalFilePhotos} seleccionados. El límite máximo es de 8 fotos por equipo.`,
+                    text: `No puedes seleccionar más fotos. Ya tienes ${totalCameraPhotos} fotos de cámara y ${totalFilePhotos} seleccionados. El límite máximo es de 12 fotos por equipo.`,
                     confirmButtonText: 'Entendido'
                 });
                 input.value = '';
@@ -626,11 +646,11 @@
                 return;
             }
 
-            if (input.files && input.files.length > 8) {
+            if (input.files && input.files.length > 12) {
                 Swal.fire({
                     icon: 'error',
                     title: 'Error cantidad de fotos superada',
-                    text: 'No puedes seleccionar más de 8 fotos. Por favor, selecciona hasta 8 archivos.',
+                    text: 'No puedes seleccionar más de 12 fotos. Por favor, selecciona hasta 12 archivos.',
                     confirmButtonText: 'Entendido'
                 });
                 input.value = '';
@@ -963,67 +983,67 @@
                 closeCameraFullscreen(index);
             });
         }
-       
+
         // Función global para remover preview (mejorada)
-window.removePreview = function (button) {
-    const previewItem = button.closest('.preview-item');
-    const equipoContainer = previewItem.closest('.equipo-item');
-    const equipoIndex = Array.from(equipoContainer.parentNode.children).indexOf(equipoContainer);
-    
-    // Obtener el índice de la foto eliminada dentro del contenedor de archivos
-    const filePreviewContainer = document.getElementById(`filePreviews${equipoIndex}`);
-    const fileIndex = Array.from(filePreviewContainer.children).indexOf(previewItem);
-    
-    // Obtener el input de archivo
-    const fileInput = document.getElementById(`fileInput${equipoIndex}`);
-    
-    if (fileInput && fileInput.files) {
-        // Crear un nuevo DataTransfer para reconstruir la lista de archivos
-        const dt = new DataTransfer();
-        
-        // Agregar todos los archivos excepto el eliminado
-        Array.from(fileInput.files).forEach((file, index) => {
-            if (index !== fileIndex) {
-                dt.items.add(file);
-            }
-        });
-        
-        // Actualizar el input con los archivos restantes
-        fileInput.files = dt.files;
-        
-        // Actualizar el label del input
-        const label = fileInput.nextElementSibling;
-        if (fileInput.files.length === 0) {
-            label.innerHTML = `
+        window.removePreview = function (button) {
+            const previewItem = button.closest('.preview-item');
+            const equipoContainer = previewItem.closest('.equipo-item');
+            const equipoIndex = Array.from(equipoContainer.parentNode.children).indexOf(equipoContainer);
+
+            // Obtener el índice de la foto eliminada dentro del contenedor de archivos
+            const filePreviewContainer = document.getElementById(`filePreviews${equipoIndex}`);
+            const fileIndex = Array.from(filePreviewContainer.children).indexOf(previewItem);
+
+            // Obtener el input de archivo
+            const fileInput = document.getElementById(`fileInput${equipoIndex}`);
+
+            if (fileInput && fileInput.files) {
+                // Crear un nuevo DataTransfer para reconstruir la lista de archivos
+                const dt = new DataTransfer();
+
+                // Agregar todos los archivos excepto el eliminado
+                Array.from(fileInput.files).forEach((file, index) => {
+                    if (index !== fileIndex) {
+                        dt.items.add(file);
+                    }
+                });
+
+                // Actualizar el input con los archivos restantes
+                fileInput.files = dt.files;
+
+                // Actualizar el label del input
+                const label = fileInput.nextElementSibling;
+                if (fileInput.files.length === 0) {
+                    label.innerHTML = `
                 <div class="text-center">
                     <i class="fas fa-cloud-upload-alt d-block mb-2" style="font-size: 1.5rem;"></i>
                     Toca o haz clic para subir tus fotos
                 </div>
             `;
-        } else {
-            label.textContent = fileInput.files.length > 1 ? 
-                `${fileInput.files.length} archivos seleccionados` : 
-                fileInput.files[0].name;
-        }
-    }
-    
-    // Animación de salida y eliminación del preview
-    previewItem.style.animation = 'fadeOut 0.3s ease';
-    setTimeout(() => {
-        previewItem.remove();
-        // Verificar si quedan fotos y mostrar estado vacío si es necesario
-        checkEmptyStateAfterRemoval(equipoIndex);
-        
-        // Mostrar mensaje de confirmación
-        Swal.fire({
-            icon: 'info',
-            title: 'Foto eliminada',
-            text: 'La foto ha sido eliminada correctamente.',
-            timer: 1000,
-            showConfirmButton: false
-        });
-    }, 300);
-};
+                } else {
+                    label.textContent = fileInput.files.length > 1 ?
+                        `${fileInput.files.length} archivos seleccionados` :
+                        fileInput.files[0].name;
+                }
+            }
+
+            // Animación de salida y eliminación del preview
+            previewItem.style.animation = 'fadeOut 0.3s ease';
+            setTimeout(() => {
+                previewItem.remove();
+                // Verificar si quedan fotos y mostrar estado vacío si es necesario
+                checkEmptyStateAfterRemoval(equipoIndex);
+
+                // Mostrar mensaje de confirmación
+                Swal.fire({
+                    icon: 'info',
+                    title: 'Foto eliminada',
+                    text: 'La foto ha sido eliminada correctamente.',
+                    timer: 1000,
+                    showConfirmButton: false
+                });
+            }, 300);
+        };
 
         // Función global para remover foto de cámara
         window.removeCameraPhoto = function (button, equipoIndex, photoIndex) {
