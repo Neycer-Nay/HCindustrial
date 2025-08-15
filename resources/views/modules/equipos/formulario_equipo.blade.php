@@ -625,7 +625,7 @@
             const previewContainer = document.getElementById(`filePreviews${index}`);
             const cameraPreviewContainer = document.getElementById(`cameraPreviews${index}`);
             previewContainer.innerHTML = '';
-            const MAX_SIZE_MB = 8;
+            const MAX_SIZE_MB = 12;
             const MAX_SIZE_BYTES = MAX_SIZE_MB * 1024 * 1024;
 
             // ✅ VALIDAR TOTAL DE FOTOS (ARCHIVOS + CÁMARA)
@@ -633,11 +633,11 @@
             const totalFilePhotos = input.files ? input.files.length : 0;
             const totalPhotos = totalFilePhotos + totalCameraPhotos;
 
-            if (totalPhotos > 8) {
+            if (totalPhotos > 12) {
                 Swal.fire({
                     icon: 'error',
                     title: 'Límite de fotos superado',
-                    text: `No puedes seleccionar más fotos. Ya tienes ${totalCameraPhotos} fotos de cámara y ${totalFilePhotos} seleccionados. El límite máximo es de 8 fotos por equipo.`,
+                    text: `No puedes seleccionar más fotos. Ya tienes ${totalCameraPhotos} fotos de cámara y ${totalFilePhotos} seleccionados. El límite máximo es de 12 fotos por equipo.`,
                     confirmButtonText: 'Entendido'
                 });
                 input.value = '';
@@ -646,11 +646,11 @@
                 return;
             }
 
-            if (input.files && input.files.length > 8) {
+            if (input.files && input.files.length > 12) {
                 Swal.fire({
                     icon: 'error',
                     title: 'Error cantidad de fotos superada',
-                    text: 'No puedes seleccionar más de 8 fotos. Por favor, selecciona hasta 8 archivos.',
+                    text: 'No puedes seleccionar más de 12 fotos. Por favor, selecciona hasta 12 archivos.',
                     confirmButtonText: 'Entendido'
                 });
                 input.value = '';

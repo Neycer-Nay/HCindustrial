@@ -257,8 +257,8 @@
                                                     </li>
                                                 </ul>
                                                 <div class="form-text mt-2">
-                                                    Puede seleccionar hasta 8 fotos incluyendo tomadas de camara y
-                                                    seleccionados (JPEG, PNG, JPG, GIF) - Máx. 8MB cada una
+                                                    Puede seleccionar hasta 12 fotos incluyendo tomadas de camara y
+                                                    seleccionados (JPEG, PNG, JPG, GIF) - Máx. 12MB cada una
                                                 </div>
                                                 <div class="tab-content" id="fotoTabContent{{ $index }}">
                                                     <!-- Pestaña de archivos -->
@@ -831,7 +831,7 @@
                 const cameraPreviewContainer = document.getElementById(`cameraPreviews${index}`);
                 const existingPreviewContainer = document.getElementById(`existingPreviews${index}`);
                 previewContainer.innerHTML = '';
-                const MAX_SIZE_MB = 8;
+                const MAX_SIZE_MB = 12;
                 const MAX_SIZE_BYTES = MAX_SIZE_MB * 1024 * 1024;
 
                 // ✅ VALIDAR TOTAL DE FOTOS (ARCHIVOS + CÁMARA + EXISTENTES)
@@ -840,11 +840,11 @@
                 const totalFilePhotos = input.files ? input.files.length : 0;
                 const totalPhotos = totalFilePhotos + totalCameraPhotos + totalExistingPhotos;
 
-                if (totalPhotos > 8) {
+                if (totalPhotos > 12) {
                     Swal.fire({
                         icon: 'error',
                         title: 'Límite de fotos superado',
-                        text: `No puedes seleccionar más fotos. Ya tienes ${totalExistingPhotos} fotos existentes, ${totalCameraPhotos} fotos de cámara y ${totalFilePhotos} seleccionados. El límite máximo es de 8 fotos por equipo.`,
+                        text: `No puedes seleccionar más fotos. Ya tienes ${totalExistingPhotos} fotos existentes, ${totalCameraPhotos} fotos de cámara y ${totalFilePhotos} seleccionados. El límite máximo es de 12 fotos por equipo.`,
                         confirmButtonText: 'Entendido'
                     });
                     input.value = '';
@@ -853,11 +853,11 @@
                     return;
                 }
 
-                if (input.files && input.files.length > 8) {
+                if (input.files && input.files.length > 12) {
                     Swal.fire({
                         icon: 'error',
                         title: 'Error cantidad de fotos superada',
-                        text: 'No puedes seleccionar más de 8 fotos. Por favor, selecciona hasta 8 archivos.',
+                        text: 'No puedes seleccionar más de 12 fotos. Por favor, selecciona hasta 12 archivos.',
                         confirmButtonText: 'Entendido'
                     });
                     input.value = '';
