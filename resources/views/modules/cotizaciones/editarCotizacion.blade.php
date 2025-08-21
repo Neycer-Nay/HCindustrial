@@ -188,7 +188,7 @@
 
                                                                 <div class="col-md-3">
                                                                     <label class="form-label small">Cantidad <span class="text-danger">*</span></label>
-                                                                    <input type="number" min="1" max="9999"
+                                                                    <input type="number" 
                                                                         name="equipos[{{ $loop->parent->index }}][repuestos_detalle][{{ $loop->index }}][cantidad]"
                                                                         class="form-control form-control-sm"
                                                                         value="{{ old('equipos.' . $loop->parent->index . '.repuestos_detalle.' . $loop->index . '.cantidad', $repuesto->cantidad) }}">
@@ -198,7 +198,7 @@
                                                                     <label class="form-label small">Precio U. (Bs) <span class="text-danger">*</span></label>
                                                                     <div class="input-group input-group-sm">
                                                                         <span class="input-group-text">Bs</span>
-                                                                        <input type="number" min="0.01" max="999999.99" step="0.01"
+                                                                        <input type="number" 
                                                                             name="equipos[{{ $loop->parent->index }}][repuestos_detalle][{{ $loop->index }}][precio]"
                                                                             class="form-control"
                                                                             value="{{ old('equipos.' . $loop->parent->index . '.repuestos_detalle.' . $loop->index . '.precio', $repuesto->precio_unitario) }}">
@@ -390,17 +390,17 @@
                                 <input type="number" min="1" max="9999"
                                        name="equipos[${equipoIndex}][repuestos_detalle][${count}][cantidad]"
                                        class="form-control form-control-sm"
-                                       value="1">
+                                       value="0">
                             </div>
 
                             <div class="col-md-3">
                                 <label class="form-label small">Precio U. (Bs) <span class="text-danger">*</span></label>
                                 <div class="input-group input-group-sm">
                                     <span class="input-group-text">Bs</span>
-                                    <input type="number" min="0.01" max="999999.99" step="0.01"
+                                    <input type="number" 
                                            name="equipos[${equipoIndex}][repuestos_detalle][${count}][precio]"
                                            class="form-control"
-                                           value="0.01">
+                                           value="0">
                                 </div>
                             </div>
                         </div>
@@ -533,17 +533,39 @@
                             equiposConErrores.push(`${equipoNombre}: El valor del trabajo debe ser mayor a 0`);
                         }
 
-                        // Validar repuestos
-                        const repuestos = equipo.querySelectorAll('.repuesto-item');
-                        if (repuestos.length === 0) {
-                            equiposConErrores.push(`${equipoNombre}: Debe agregar al menos un repuesto`);
-                        }
+                        // Validar repuestos SOLO NOMBRE
+        const repuestos = equipo.querySelectorAll('.repuesto-item');
+        if (repuestos.length === 0) {
+            equiposConErrores.push(`${equipoNombre}: Debe agregar al menos un repuesto`);
+        } else {
+            repuestos.forEach((repuesto, repuestoIndex) => {
+                const nombreRepuesto = repuesto.querySelector('input[name*="[nombre]"]');
+                const repuestoNum = repuestoIndex + 1;
 
-                        // Validar servicios
-                        const servicios = equipo.querySelectorAll('.servicio-item');
-                        if (servicios.length === 0) {
-                            equiposConErrores.push(`${equipoNombre}: Debe agregar al menos un servicio`);
-                        }
+                if (!nombreRepuesto || !nombreRepuesto.value.trim()) {
+                    equiposConErrores.push(`${equipoNombre} - Repuesto ${repuestoNum}: El nombre es obligatorio`);
+                } else if (nombreRepuesto.value.trim().length < 3) {
+                    equiposConErrores.push(`${equipoNombre} - Repuesto ${repuestoNum}: El nombre debe tener al menos 3 caracteres`);
+                }
+            });
+        }
+
+        // Validar servicios SOLO NOMBRE
+        const servicios = equipo.querySelectorAll('.servicio-item');
+        if (servicios.length === 0) {
+            equiposConErrores.push(`${equipoNombre}: Debe agregar al menos un servicio`);
+        } else {
+            servicios.forEach((servicio, servicioIndex) => {
+                const nombreServicio = servicio.querySelector('input[name*="[nombre]"]');
+                const servicioNum = servicioIndex + 1;
+
+                if (!nombreServicio || !nombreServicio.value.trim()) {
+                    equiposConErrores.push(`${equipoNombre} - Servicio ${servicioNum}: El nombre del servicio es obligatorio`);
+                } else if (nombreServicio.value.trim().length < 3) {
+                    equiposConErrores.push(`${equipoNombre} - Servicio ${servicioNum}: El nombre del servicio debe tener al menos 3 caracteres`);
+                }
+            });
+        }
                     });
 
                     if (equiposConErrores.length > 0) {

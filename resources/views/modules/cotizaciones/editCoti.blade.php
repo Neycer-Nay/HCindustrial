@@ -72,7 +72,8 @@
                             <div class="card-body">
                                 <input type="hidden" name="equipos[{{ $loop->index }}][equipo_id]" value="{{ $equipo->id }}">
                                 <h6 class="mb-3">
-                                    <i class="fas fa-tools"></i> Categoria: {{ Str::title( str_replace('_', ' ', $equipo->tipo)) }}
+                                    <i class="fas fa-tools"></i> Categoria:
+                                    {{ Str::title(str_replace('_', ' ', $equipo->tipo)) }}
                                 </h6>
 
                                 <div class="row">
@@ -81,7 +82,7 @@
                                         <div class="equipo-info p-3">
                                             <h6 class="text-primary"><i class="fas fa-info-circle"></i> Información Técnica</h6>
                                             <ul class="list-unstyled equipo-datos">
-                                                
+
                                                 <li><strong>Marca:</strong> {{ $equipo->marca }}</li>
                                                 <li><strong>Modelo:</strong> {{ $equipo->modelo }}</li>
                                                 <li><strong>Color:</strong> {{ $equipo->color ?? 'N/A' }}</li>
@@ -100,12 +101,12 @@
                                                     <li><strong>Kva/Kw:</strong> {{ $equipo->kva_kw ?? 'N/A' }}</li>
                                                 @else
                                                     <li>
-                                                    <strong>Potencia:</strong>
-                                                    {{ $equipo->potencia ?? 'N/A' }}
-                                                    @if($equipo->potencia_unidad)
-                                                    <span>{{ $equipo->potencia_unidad ?? 'N/A'}}</span>
-                                                    @endif
-                                                </li>
+                                                        <strong>Potencia:</strong>
+                                                        {{ $equipo->potencia ?? 'N/A' }}
+                                                        @if($equipo->potencia_unidad)
+                                                            <span>{{ $equipo->potencia_unidad ?? 'N/A'}}</span>
+                                                        @endif
+                                                    </li>
                                                 @endif
                                             </ul>
 
@@ -214,7 +215,7 @@
                                                                             class="text-danger">*</span></label>
                                                                     <div class="input-group input-group-sm">
                                                                         <span class="input-group-text">Bs</span>
-                                                                        <input type="number" min="0.01" max="999999.99" step="0.01"
+                                                                        <input type="number" 
                                                                             name="equipos[{{ $loop->parent->index }}][repuestos_detalle][{{ $index }}][precio]"
                                                                             class="form-control" value="{{ $repuesto['precio'] }}">
                                                                     </div>
@@ -397,45 +398,45 @@
             const count = container.querySelectorAll('.repuesto-item').length;
 
             const html = `
-                    <div class="repuesto-item card mb-3">
-                        <div class="card-body">
-                            <div class="row g-2">
-                                <div class="col-md-6">
-                                    <label class="form-label small">Nombre del repuesto <span class="text-danger">*</span></label>
-                                    <input type="text"
-                                           name="equipos[${equipoIndex}][repuestos_detalle][${count}][nombre]"
-                                           class="form-control form-control-sm">
-                                </div>
+                        <div class="repuesto-item card mb-3">
+                            <div class="card-body">
+                                <div class="row g-2">
+                                    <div class="col-md-6">
+                                        <label class="form-label small">Nombre del repuesto <span class="text-danger">*</span></label>
+                                        <input type="text"
+                                               name="equipos[${equipoIndex}][repuestos_detalle][${count}][nombre]"
+                                               class="form-control form-control-sm">
+                                    </div>
 
-                                <div class="col-md-3">
-                                    <label class="form-label small">Cantidad <span class="text-danger">*</span></label>
-                                    <input type="number" min="1" max="9999"
-                                           name="equipos[${equipoIndex}][repuestos_detalle][${count}][cantidad]"
-                                           class="form-control form-control-sm"
-                                           value="1">
-                                </div>
+                                    <div class="col-md-3">
+                                        <label class="form-label small">Cantidad <span class="text-danger">*</span></label>
+                                        <input type="number" min="1" max="9999"
+                                               name="equipos[${equipoIndex}][repuestos_detalle][${count}][cantidad]"
+                                               class="form-control form-control-sm"
+                                               value="0">
+                                    </div>
 
-                                <div class="col-md-3">
-                                    <label class="form-label small">Precio U. (Bs) <span class="text-danger">*</span></label>
-                                    <div class="input-group input-group-sm">
-                                        <span class="input-group-text">Bs</span>
-                                        <input type="number" min="0.01" max="999999.99" step="0.01"
-                                               name="equipos[${equipoIndex}][repuestos_detalle][${count}][precio]"
-                                               class="form-control"
-                                               value="0.01">
+                                    <div class="col-md-3">
+                                        <label class="form-label small">Precio U. (Bs) <span class="text-danger">*</span></label>
+                                        <div class="input-group input-group-sm">
+                                            <span class="input-group-text">Bs</span>
+                                            <input type="number" 
+                                                   name="equipos[${equipoIndex}][repuestos_detalle][${count}][precio]"
+                                                   class="form-control"
+                                                   value="0">
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
 
-                            <div class="text-end mt-2">
-                                <button type="button" class="btn btn-danger btn-sm"
-                                        onclick="eliminarRepuesto(this)">
-                                    <i class="fas fa-trash-alt"></i> Eliminar
-                                </button>
+                                <div class="text-end mt-2">
+                                    <button type="button" class="btn btn-danger btn-sm"
+                                            onclick="eliminarRepuesto(this)">
+                                        <i class="fas fa-trash-alt"></i> Eliminar
+                                    </button>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    `;
+                        `;
 
             container.insertAdjacentHTML('beforeend', html);
         }
@@ -560,24 +561,27 @@
                             }
 
                             // Validar cantidad
-                            if (!cantidadRepuesto || !cantidadRepuesto.value || parseInt(cantidadRepuesto.value) <= 0) {
-                                equiposConErrores.push(`${equipoNombre} - Repuesto ${repuestoNum}: La cantidad debe ser mayor a 0`);
-                            } else if (parseInt(cantidadRepuesto.value) > 9999) {
-                                equiposConErrores.push(`${equipoNombre} - Repuesto ${repuestoNum}: La cantidad no puede ser mayor a 9999`);
-                            }
-
-                            // Validar precio
-                            if (!precioRepuesto || !precioRepuesto.value || parseFloat(precioRepuesto.value) <= 0) {
-                                equiposConErrores.push(`${equipoNombre} - Repuesto ${repuestoNum}: El precio debe ser mayor a 0`);
-                            } else if (parseFloat(precioRepuesto.value) < 0.01) {
-                                equiposConErrores.push(`${equipoNombre} - Repuesto ${repuestoNum}: El precio mínimo es 0.01 Bs`);
-                            } else if (parseFloat(precioRepuesto.value) > 999999.99) {
-                                equiposConErrores.push(`${equipoNombre} - Repuesto ${repuestoNum}: El precio no puede ser mayor a 999,999.99 Bs`);
-                            }
+                           
                         });
 
                         if (hayDuplicados) {
                             equiposConErrores.push(`${equipoNombre}: No puede tener repuestos con nombres duplicados`);
+                        }
+                        // ✅ VALIDAR SERVICIOS
+                        const servicios = equipo.querySelectorAll('.servicio-item');
+                        if (servicios.length === 0) {
+                            equiposConErrores.push(`${equipoNombre}: Debe agregar al menos un servicio`);
+                        } else {
+                            servicios.forEach((servicio, servicioIndex) => {
+                                const nombreServicio = servicio.querySelector('input[name*="[nombre]"]');
+                                const servicioNum = servicioIndex + 1;
+
+                                if (!nombreServicio || !nombreServicio.value.trim()) {
+                                    equiposConErrores.push(`${equipoNombre} - Servicio ${servicioNum}: El nombre del servicio es obligatorio`);
+                                } else if (nombreServicio.value.trim().length < 3) {
+                                    equiposConErrores.push(`${equipoNombre} - Servicio ${servicioNum}: El nombre del servicio debe tener al menos 3 caracteres`);
+                                }
+                            });
                         }
                     }
                 });
@@ -588,11 +592,11 @@
                         icon: 'error',
                         title: 'Errores en el formulario',
                         html: `<div style="text-align: left; max-height: 400px; overflow-y: auto; padding: 10px;">
-                                           <p><strong>Corrige los siguientes errores:</strong></p>
-                                           <ul style="margin: 0;">
-                                               ${equiposConErrores.map(error => `<li style="margin-bottom: 5px;">${error}</li>`).join('')}
-                                           </ul>
-                                       </div>`,
+                                               <p><strong>Corrige los siguientes errores:</strong></p>
+                                               <ul style="margin: 0;">
+                                                   ${equiposConErrores.map(error => `<li style="margin-bottom: 5px;">${error}</li>`).join('')}
+                                               </ul>
+                                           </div>`,
                         confirmButtonText: 'Entendido',
                         confirmButtonColor: '#dc3545',
                         width: '600px'
@@ -628,11 +632,11 @@
                         icon: 'error',
                         title: 'Errores en el formulario',
                         html: `<div style="text-align: left; max-height: 400px; overflow-y: auto; padding: 10px;">
-                                           <p><strong>Corrige los siguientes errores:</strong></p>
-                                           <ul style="margin: 0;">
-                                               ${equiposConErrores.map(error => `<li style="margin-bottom: 5px;">${error}</li>`).join('')}
-                                           </ul>
-                                       </div>`,
+                                               <p><strong>Corrige los siguientes errores:</strong></p>
+                                               <ul style="margin: 0;">
+                                                   ${equiposConErrores.map(error => `<li style="margin-bottom: 5px;">${error}</li>`).join('')}
+                                               </ul>
+                                           </div>`,
                         confirmButtonText: 'Entendido',
                         confirmButtonColor: '#dc3545',
                         width: '600px'
@@ -661,10 +665,10 @@
                 }
             }
 
-            // ✅ VALIDACIÓN EN TIEMPO REAL PARA REPUESTOS
+            // ✅ VALIDACIÓN EN TIEMPO REAL
             document.addEventListener('input', function (e) {
                 // Validar nombre del repuesto
-                if (e.target.matches('input[name*="[nombre]"]')) {
+                if (e.target.matches('input[name*="repuestos_detalle"][name*="[nombre]"]')) {
                     const input = e.target;
                     const value = input.value.trim();
 
@@ -683,35 +687,18 @@
                     }
                 }
 
-                // Validar cantidad
-                if (e.target.matches('input[name*="[cantidad]"]')) {
+                // Validar nombre del servicio
+                if (e.target.matches('input[name*="servicios_detalle"][name*="[nombre]"]')) {
                     const input = e.target;
-                    const value = parseInt(input.value);
+                    const value = input.value.trim();
 
-                    if (isNaN(value) || value <= 0) {
+                    if (value.length === 0) {
                         input.classList.add('is-invalid');
                         input.classList.remove('is-valid');
-                    } else if (value > 9999) {
+                    } else if (value.length < 3) {
                         input.classList.add('is-invalid');
                         input.classList.remove('is-valid');
-                    } else {
-                        input.classList.remove('is-invalid');
-                        input.classList.add('is-valid');
-                    }
-                }
-
-                // Validar precio
-                if (e.target.matches('input[name*="[precio]"]')) {
-                    const input = e.target;
-                    const value = parseFloat(input.value);
-
-                    if (isNaN(value) || value <= 0) {
-                        input.classList.add('is-invalid');
-                        input.classList.remove('is-valid');
-                    } else if (value < 0.01) {
-                        input.classList.add('is-invalid');
-                        input.classList.remove('is-valid');
-                    } else if (value > 999999.99) {
+                    } else if (value.length > 100) {
                         input.classList.add('is-invalid');
                         input.classList.remove('is-valid');
                     } else {
@@ -750,25 +737,25 @@
             const count = container.querySelectorAll('.servicio-item').length;
 
             const html = `
-        <div class="servicio-item card mb-2">
-            <div class="card-body py-2">
-                <div class="row g-2 align-items-center">
-                    <div class="col-md-10">
-                        <label class="form-label small mb-1">Nombre del servicio <span class="text-danger">*</span></label>
-                        <input type="text"
-                            name="equipos[${equipoIndex}][servicios_detalle][${count}][nombre]"
-                            class="form-control form-control-sm">
-                    </div>
-                    <div class="col-md-2 text-end">
-                        <button type="button" class="btn btn-danger btn-sm mt-3"
-                            onclick="eliminarServicio(this)">
-                            <i class="fas fa-trash-alt"></i>
-                        </button>
+            <div class="servicio-item card mb-2">
+                <div class="card-body py-2">
+                    <div class="row g-2 align-items-center">
+                        <div class="col-md-10">
+                            <label class="form-label small mb-1">Nombre del servicio <span class="text-danger">*</span></label>
+                            <input type="text"
+                                name="equipos[${equipoIndex}][servicios_detalle][${count}][nombre]"
+                                class="form-control form-control-sm">
+                        </div>
+                        <div class="col-md-2 text-end">
+                            <button type="button" class="btn btn-danger btn-sm mt-3"
+                                onclick="eliminarServicio(this)">
+                                <i class="fas fa-trash-alt"></i>
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-        `;
+            `;
             container.insertAdjacentHTML('beforeend', html);
         }
 

@@ -83,8 +83,8 @@ class CotizacionController extends Controller
             'equipos.*.valor_trabajo' => 'required|numeric|min:0.01',
             'equipos.*.repuestos_detalle' => 'required|array|min:1',
             'equipos.*.repuestos_detalle.*.nombre' => 'required|string|min:3|max:100',
-            'equipos.*.repuestos_detalle.*.cantidad' => 'required|integer|min:1|max:9999',
-            'equipos.*.repuestos_detalle.*.precio' => 'required|numeric|min:0.01|max:999999.99',
+            'equipos.*.repuestos_detalle.*.cantidad' => 'nullable|integer',
+            'equipos.*.repuestos_detalle.*.precio' => 'nullable|numeric',
             'equipos.*.fotos' => 'required|array|min:1', // ✅ FOTOS OBLIGATORIAS
             'equipos.*.fotos.*' => 'integer|exists:fotos_equipos,id',
             'descuento' => 'nullable|numeric|min:0',
@@ -100,10 +100,6 @@ class CotizacionController extends Controller
             'equipos.*.repuestos_detalle.min' => 'Debe agregar al menos un repuesto.',
             'equipos.*.repuestos_detalle.*.nombre.required' => 'El nombre del repuesto es obligatorio.',
             'equipos.*.repuestos_detalle.*.nombre.min' => 'El nombre del repuesto debe tener al menos 3 caracteres.',
-            'equipos.*.repuestos_detalle.*.cantidad.required' => 'La cantidad es obligatoria.',
-            'equipos.*.repuestos_detalle.*.cantidad.min' => 'La cantidad debe ser mayor a 0.',
-            'equipos.*.repuestos_detalle.*.precio.required' => 'El precio es obligatorio.',
-            'equipos.*.repuestos_detalle.*.precio.min' => 'El precio debe ser mayor a 0.',
             'equipos.*.fotos.required' => 'Debe seleccionar al menos una foto para cada equipo.',
             'equipos.*.fotos.min' => 'Debe seleccionar al menos una foto para cada equipo.',
             'equipos.*.servicios_detalle.required' => 'Debe agregar al menos un servicio.',
@@ -196,8 +192,8 @@ class CotizacionController extends Controller
                 foreach ($equipoData['repuestos_detalle'] as $repuesto) {
                     $cotizacionEquipo->repuestos()->create([
                         'nombre' => trim($repuesto['nombre']),
-                        'cantidad' => $repuesto['cantidad'],
-                        'precio_unitario' => $repuesto['precio']
+                        'cantidad' => $repuesto['cantidad'] ?? 0,
+                        'precio_unitario' => $repuesto['precio'] ?? 0
                     ]);
                 }
                 
@@ -273,8 +269,8 @@ class CotizacionController extends Controller
             'equipos.*.valor_trabajo' => 'required|numeric|min:0.01',
             'equipos.*.repuestos_detalle' => 'required|array|min:1',
             'equipos.*.repuestos_detalle.*.nombre' => 'required|string|min:3|max:100',
-            'equipos.*.repuestos_detalle.*.cantidad' => 'required|integer|min:1|max:9999',
-            'equipos.*.repuestos_detalle.*.precio' => 'required|numeric|min:0.01|max:999999.99',
+            'equipos.*.repuestos_detalle.*.cantidad' => 'nullable|integer',
+            'equipos.*.repuestos_detalle.*.precio' => 'nullable|numeric',
             'equipos.*.fotos' => 'required|array|min:1',
             'equipos.*.fotos.*' => 'integer|exists:fotos_equipos,id',
             'descuento' => 'nullable|numeric|min:0',
@@ -289,10 +285,6 @@ class CotizacionController extends Controller
             'equipos.*.repuestos_detalle.min' => 'Debe agregar al menos un repuesto.',
             'equipos.*.repuestos_detalle.*.nombre.required' => 'El nombre del repuesto es obligatorio.',
             'equipos.*.repuestos_detalle.*.nombre.min' => 'El nombre del repuesto debe tener al menos 3 caracteres.',
-            'equipos.*.repuestos_detalle.*.cantidad.required' => 'La cantidad es obligatoria.',
-            'equipos.*.repuestos_detalle.*.cantidad.min' => 'La cantidad debe ser mayor a 0.',
-            'equipos.*.repuestos_detalle.*.precio.required' => 'El precio es obligatorio.',
-            'equipos.*.repuestos_detalle.*.precio.min' => 'El precio debe ser mayor a 0.',
             'equipos.*.fotos.required' => 'Debe seleccionar al menos una foto para cada equipo.',
             'equipos.*.fotos.min' => 'Debe seleccionar al menos una foto para cada equipo.',
             'equipos.*.servicios_detalle.required' => 'Debe agregar al menos un servicio.',
@@ -340,8 +332,8 @@ class CotizacionController extends Controller
                 foreach ($equipoData['repuestos_detalle'] as $repuesto) {
                     $cotizacionEquipo->repuestos()->create([
                         'nombre' => trim($repuesto['nombre']),
-                        'cantidad' => $repuesto['cantidad'],
-                        'precio_unitario' => $repuesto['precio']
+                        'cantidad' => $repuesto['cantidad'] ?? 0,
+                        'precio_unitario' => $repuesto['precio'] ?? 0
                     ]);
                 }
 

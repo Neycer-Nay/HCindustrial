@@ -88,8 +88,8 @@
             height: auto;
             margin-right: 5px;
             margin-bottom: 5px;
-            border-radius: 4px;
-            border: 1px solid #aaa;
+            
+            
             display: inline-block;
         }
 
